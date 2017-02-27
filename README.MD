@@ -13,9 +13,10 @@
 ## snapshot_backup.sh
 * This Script will Create and  delete EBs Volume snapshot
 * Use can define the age of snapshot to delete
-  ### USAGE: 
-*TO Take Backup: snapshot_backup.sh backup
-*To delete: snapshot_backup.sh delete 100(age)
+
+### USAGE: 
+*Backup: snapshot_backup.sh backup
+*Delete: snapshot_backup.sh delete 100(age)
 
 ##Developer
 *sanjaym756@gmail.com
