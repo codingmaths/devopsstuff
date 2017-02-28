@@ -15,8 +15,8 @@
 * Use can define the age of snapshot to delete
 
 ### USAGE: 
-*Backup: snapshot_backup.sh backup
-*Delete: snapshot_backup.sh delete 100(age)
+#### Backup: snapshot_backup.sh backup
+#### Delete: snapshot_backup.sh delete 100(age)
 
 ##Developer
 *sanjaym756@gmail.com

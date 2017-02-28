@@ -1,13 +1,22 @@
 #!/bin/sh
 
-action=$1
-age=$2
+# This script is for snapshot backup and deletion. we can use it for snapshot bakup policy, based on our organisation requirement. 
+# Reuirement: 1. privileged AWS access to perform the task. 2. yum install jq(for centos).
+### USAGE:
+## Backup: snapshot_backup.sh backup
+## Delete: snapshot_backup.sh delete 100(age)
+# --
+
+
+action=$1   # backup/delete
+age=$2      # no of day old snapshot to delete
 
 if [ -z $action ]; 
 then
   echo "action not defined, add backup/delete action"
   exit 1
 fi
+
 
 if [ $action = 'delete' ] && [ -z $age ];
 then
@@ -24,24 +33,21 @@ function backup_ebs () {
   done
 }
 
-function delete_ebs () {
+function delete_snapshot () {
   for snapshot in $(aws ec2 describe-snapshots | jq .Snapshots[].SnapshotId | sed 's/\"//g')
   
   do
-    echo "snap id:" $snapshot
     snapshotdate=$(aws ec2 describe-snapshots --filter Name=snapshot-id,Values=$snapshot | jq .Snapshots[].StartTime | cut -d T -f1 | sed 's/\"//g')
-    echo "snapshotdate:" $snapshotdate
-    exit2
-    startdate=$(date +%s)
-    echo "start:" $startdate
-    enddate=$(date -d $snapshotdate +%s)
-    echo "date:" $enddate
+
+    startdate=$(date +%s)    #todays date 
+    enddate=$(date -d $snapshotdate +%s)  #snapshot creation date
     interval=$[ (startdate - enddate) / (60*60*24) ]
-    echo "interval:" $interval
+
     if (( $interval >= $age ));
     then
       aws ec2 delete-snapshot --snapshot-id $snapshot
     fi
+
   done
 }
 
@@ -50,6 +56,6 @@ case $action in
     backup_ebs
     ;;
   delete)
-    delete_ebs
+    delete_snapshot
     ;;
 esac
