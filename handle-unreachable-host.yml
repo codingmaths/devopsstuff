@@ -1,0 +1,14 @@
+
+- name: playbook to manage unreachable hosts withot error,This script will skip to unreachable hosts without failing the whole playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  max_fail_percentage: 0
+  any_errors_fatal: false
+  ignore_errors: yes
+  tasks:
+    - name: Delete keys in line which starts with IP Address
+      lineinfile:
+        dest: filename
+        state: absent
+        regexp: '^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}'

@@ -1,0 +1,10 @@
+- name: Ansible regex to delete all IPv4 address from a file, this regex is for simple IPv4 Address
+  hosts: 127.0.0.1
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Delete lines which starts with IP Address
+      lineinfile:
+        dest: filename
+        state: absent
+        regexp: '^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}'
