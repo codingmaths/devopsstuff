@@ -1,0 +1,37 @@
+---
+# Using this script we can hosts dynamic hosts, which we not part for the hosts file. Scope of this is only single playbook.
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Create the EC2 Instance   #Task can be anything
+      ec2:
+        region: us-east-1
+        group: sg-xxxxx # Replace your Security Group here
+        keypair: test-key # Replace Key here
+        instance_type: t2.mirco
+        image: ami-xxxxx # Replace AMI here
+        vpc_subnet_id: subnet-xxxxx # Replace Subnet here
+        assign_public_ip: yes
+        wait: yes
+        wait_timeout: 600
+      register: ec2
+
+    - name: Create SSH Group to login dynamically
+      add_host: 
+        hostname: "{{ item.public_ip }}"
+        groupname: ec2_server
+      with_items: ec2.instances
+
+    - name: Wait for SSH to come up
+      wait_for: 
+        host: "{{ item.public_ip }}" 
+        port: 22 
+        state: started
+      with_items: ec2.instances
+
+- name: Use Above IP for new task
+  hosts: ec2_server
+  tasks:
+    - name: echo ifconfig
+      command: ifconfig

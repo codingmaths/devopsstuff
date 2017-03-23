@@ -11,18 +11,21 @@
 *USAGE: list_instance.py --region region_name
 
 ## snapshot_backup.sh
-* This Script will Create and  delete EBs Volume snapshot.
-* Use can define the age of snapshot to delete.
+*This Script will Create and  delete EBs Volume snapshot.
+*Use can define the age of snapshot to delete.
 
 ### USAGE: 
 ######## Backup: snapshot_backup.sh backup
 ######## Delete: snapshot_backup.sh delete 100(age)
 
 ## handle-unreachable-host.yml
-* Ansible playbook to handle failing/unreachable host.
+*Ansible playbook to handle failing/unreachable host.
 
 ## getip_regex.yml
-* Ansible playbook with regex to get/delete the  lines starting with IP-Address from a file.
+*Ansible playbook with regex to get/delete the  lines starting with IP-Address from a file.
+
+## add-inmemory-host.yml
+*Ansible-playbook to login dynamically created instance, which is not part of hosts(inventory) file.
 
 ##Developer
 *sanjaym756@gmail.com
