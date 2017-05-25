@@ -27,5 +27,8 @@
 ## add-inmemory-host.yml
 *Ansible-playbook to login dynamically created instance, which is not part of hosts(inventory) file.
 
+## convert_aws_credentials.py
+  convert aws cred in .config file
+
 ##Developer
 *sanjaym756@gmail.com
