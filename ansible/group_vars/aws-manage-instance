@@ -1,0 +1,4 @@
+---
+aws_vpc_name: bijou-dev-vpc
+aws_vpc_gateway_id: igw-f8295e9d
+region: eu-west-1

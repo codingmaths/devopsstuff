@@ -1,0 +1,32 @@
+---
+- name: "Find old AMIs"   ## will delet old AMIs except the latest 10
+  ec2_ami_find:
+    region: "{{ aws_region_name }}"
+    name: "*{{ org }}-{{ environment }}-ami"
+    sort: creationDate
+    sort_order: descending
+    sort_start: 10
+    sort_end: 20
+  register: old_amis
+- debug:
+    msg: "{{ old_amis.results[item].ami_id }}"
+  when: ( "{{ old_amis.results[item].ami_id }}" is defined)
+  with_items: 
+      - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  register: del_amis
+
+- debug: 
+    var: del_amis
+
+- name: Delete the AMIs
+  ec2_ami:
+    image_id: "{{ del_amis.results[item].msg }}"
+    region: "{{ aws_region_name }}"
+    device_mapping:
+      - device_name: /dev/sda1
+        delete_on_termination: true
+    state: absent
+  register: deleted_ami
+  with_items:
+      - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  when: ( "{{ del_amis.results[item].msg }}" is defined )

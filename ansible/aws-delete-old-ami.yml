@@ -1,0 +1,11 @@
+---
+- hosts: 127.0.0.1 
+  gather_facts: no
+  roles:
+    - role: aws_delete_old_amis
+      vars: 
+        - aws_region_name: "{{ aws_region_name }}"
+        - environment: "{{ env }}"
+        - org: "{{ org }}"
+  vars_files:
+    - group_vars/aws

@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
+    - obtain_gateway_public_ip
+    - bijou_aws_manage_instance
+  vars:
+    application: bijou
+    instance_id: "{{ instance_id }}"
+    state: "{{ state }}"
+  vars_files:
+    - group_vars/aws-manage-{{ environment }}-instance
