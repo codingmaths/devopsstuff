@@ -1,10 +1,10 @@
 # DEVOPSSTUFF
 
-## Scripts for AWS and Devops Automation.
+## Scripts for AWS and Devops Automation
 
 ### list_volumes.py:
 
-  ```This script will print unused volumes for a region owned by the user, based on user aws config```
+  ```This script will print unused volumes for a region owned by the user, based on user aws config \n```
       ``USAGE: list_volumes.py --region region_name``
 
 ### list_instance.py:
