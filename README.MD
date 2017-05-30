@@ -4,11 +4,11 @@
 
 ### list_volumes.py:
   ```This script will print unused volumes for a region owned by the user, based on user aws config.```
-    ``USAGE: list_volumes.py --region region_name``
+      ``USAGE: list_volumes.py --region region_name``
 
 ### list_instance.py:
   ```This script will print instances region, based on user aws config.```
-  ``USAGE: list_instance.py --region region_name``
+      ``USAGE: list_instance.py --region region_name``
 
 ### snapshot_backup.sh:
   ```This Script will Create and  delete Elastic Block Storage(EBS) Volume snapshot.```
@@ -32,5 +32,5 @@
 ## ansible directory:
   ```All ansible playbooks and roles```
 
-##Contact:
+## Contact:
   ```sanjaym756@gmail.com```
